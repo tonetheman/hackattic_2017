@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"strings"
 )
 
 type keyValue struct {
@@ -14,26 +13,21 @@ type keyValue struct {
 }
 
 type block struct {
-	Nonce string
-	Data  []keyValue
+	Nonce string `json:"nonce"`
+	Data  []keyValue `json:"data"`
 }
 type iJson struct {
-	Difficulty int
-	bl         block
+	Difficulty int   `json:"difficulty"`
+	Block      block `json:"block"`
 }
 
-func inputJson(s string) string {
+func inputJson(s []byte) string {
 	// need to return json without white spaces
 	// and keys need to be in alpha order!
-	dec := json.NewDecoder(strings.NewReader(s))
-	fmt.Println(dec)
 	var ij iJson
-	err := dec.Decode(&ij)
-	if err != nil {
-		fmt.Println("err on json decode", err)
-	}
+	json.Unmarshal(s, &ij)
 	fmt.Println("ij", ij)
-	return s
+	return ""
 }
 
 func checkSha256() {
@@ -65,5 +59,5 @@ func main() {
 	//orderCheck("{a:1,b:1}")
 	//orderCheck("{b:1,a:1}")
 	data := readInputFile("input.txt")
-	inputJson(string(data))
+	inputJson(data)
 }
