@@ -3,6 +3,7 @@ package main
 import (
 	"crypto/sha256"
 	"fmt"
+	"io/ioutil"
 )
 
 func inputJson(s string) string {
@@ -27,9 +28,17 @@ func orderCheck(s string) {
 	fmt.Printf("%x\n", res)
 }
 
+func readInputFile(filename string) []byte {
+	data, err := ioutil.ReadFile(filename)
+	if err != nil {
+		fmt.Println("got an error reading file", err)
+	}
+	return data
+}
+
 func main() {
 	//checkSha256()
-	orderCheck("{a:1,b:1}")
-	orderCheck("{b:1,a:1}")
-
+	//orderCheck("{a:1,b:1}")
+	//orderCheck("{b:1,a:1}")
+	fmt.Println(readInputFile("input.txt"))
 }
