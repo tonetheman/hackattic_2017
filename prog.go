@@ -71,7 +71,7 @@ func combineParseAndSort() []fakeKeyValue {
 	blockData := gjson.Get(string(data), "block.data")
 	a := make([]fakeKeyValue, 0)
 	blockData.ForEach(func(key, value gjson.Result) bool {
-		fmt.Println("value is array?", value.IsArray())
+		//fmt.Println("value is array?", value.IsArray())
 		k := value.Array()[0].String()
 		v := value.Array()[1].Int()
 		a = append(a, fakeKeyValue{k, int(v)})
@@ -100,8 +100,19 @@ func makeString(a []fakeKeyValue, nonce int) string {
 
 func makeDataLine() {
 	a := combineParseAndSort()
-	ts := makeString(a, 1000)
-	fmt.Println(ts)
+	for i := 0; i < 1000; i++ {
+		ts := makeString(a, i)
+		//fmt.Println(ts)
+		h := sha256.New()
+		h.Write([]byte(ts))
+		res := h.Sum(nil)
+		if res[0] == 0 {
+			// res is a byte array
+			fmt.Printf("nonce: %d - %x\n", i, res)
+
+		}
+	}
+
 }
 
 func main() {
