@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"sort"
+	"strconv"
 
 	"github.com/tidwall/gjson"
 )
@@ -65,7 +66,7 @@ func testSort() {
 	fmt.Println(a)
 }
 
-func combineParseAndSort() {
+func combineParseAndSort() []fakeKeyValue {
 	data := readInputFile("input.txt")
 	blockData := gjson.Get(string(data), "block.data")
 	a := make([]fakeKeyValue, 0)
@@ -76,13 +77,31 @@ func combineParseAndSort() {
 		a = append(a, fakeKeyValue{k, int(v)})
 		return true
 	})
-	fmt.Println("gathered data:", a)
+	//fmt.Println("gathered data:", a)
 	sort.Slice(a, func(i, j int) bool {
 		return a[i].key < a[j].key
 	})
-	fmt.Println("sorted")
-	fmt.Println(a)
+	//fmt.Println("sorted")
+	//fmt.Println(a)
+	return a
+}
 
+func makeString(a []fakeKeyValue, nonce int) string {
+	ts := "{\"nonce\":" + strconv.Itoa(nonce) + ",\"data\":["
+	for i := 0; i < len(a); i++ {
+		ts += "[" + a[i].key + "," + strconv.Itoa(a[i].val) + "]"
+		if i < len(a)-1 {
+			ts += ","
+		}
+	}
+	ts += "]"
+	return ts
+}
+
+func makeDataLine() {
+	a := combineParseAndSort()
+	ts := makeString(a, 1000)
+	fmt.Println(ts)
 }
 
 func main() {
@@ -91,5 +110,6 @@ func main() {
 	//orderCheck("{b:1,a:1}")
 	//howToParse()
 	//testSort()
-	combineParseAndSort()
+	//combineParseAndSort()
+	makeDataLine()
 }
