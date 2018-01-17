@@ -1,7 +1,32 @@
-{"difficulty": 14, 
-"block": {"nonce": null, 
-"data": [["213a7f85c41b256b679e530c4943eee0", -79], 
-["94a82aefc5f498f0d3538381ef728afa", 81], 
-["753c06c1e88d26b4d62f7edba70e9673", -85], 
-["e8b3545c77b9fcea43445e3f89748aa4", 23], 
-["9f42081d4d9ab1d651d9df3e07c5ec36", 39]]}}
+{
+    "difficulty": 14,
+    "block": {
+        "nonce": null,
+        "data": [
+            [
+                "fddc4e3b9b22a1834a800f247b26e6e9",
+                72
+            ],
+            [
+                "a942c45052854d2cb63eb0d1beb1618d",
+                -11
+            ],
+            [
+                "ef3a6f41c57d4b442ab58ef193ef096f",
+                43
+            ],
+            [
+                "8a94da16ddce249d1afc934c03861dd9",
+                -100
+            ],
+            [
+                "ad0c02e1d538b098b10c3a23f5ea3458",
+                -84
+            ],
+            [
+                "a7862c6b33a53ba3ef183105c8bebee2",
+                53
+            ]
+        ]
+    }
+}
