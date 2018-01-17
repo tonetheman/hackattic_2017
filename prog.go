@@ -4,6 +4,7 @@ import (
 	"crypto/sha256"
 	"fmt"
 	"io/ioutil"
+	"sort"
 
 	"github.com/tidwall/gjson"
 )
@@ -45,9 +46,34 @@ func howToParse() {
 	})
 }
 
+type fakeKeyValue struct {
+	key string
+	val int
+}
+
+func testSort() {
+	a := make([]fakeKeyValue, 0)
+	a = append(a, fakeKeyValue{"213a7f85c41b256b679e530c4943eee0", -79})
+	a = append(a, fakeKeyValue{"94a82aefc5f498f0d3538381ef728afa", 81})
+	a = append(a, fakeKeyValue{"753c06c1e88d26b4d62f7edba70e9673", -85})
+	fmt.Println(a)
+	fmt.Println("now need to sort")
+	sort.Slice(a, func(i, j int) bool {
+		return a[i].key < a[j].key
+	})
+	fmt.Println("sorted")
+	fmt.Println(a)
+}
+
+func combineParseAndSort() {
+
+}
+
 func main() {
 	//checkSha256()
 	//orderCheck("{a:1,b:1}")
 	//orderCheck("{b:1,a:1}")
-	howToParse()
+	//howToParse()
+	//testSort()
+	combineParseAndSort()
 }
