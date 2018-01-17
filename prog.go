@@ -78,9 +78,11 @@ func combineParseAndSort() []fakeKeyValue {
 		return true
 	})
 	//fmt.Println("gathered data:", a)
+
 	sort.Slice(a, func(i, j int) bool {
 		return a[i].key < a[j].key
 	})
+
 	//fmt.Println("sorted")
 	//fmt.Println(a)
 	return a
@@ -94,13 +96,13 @@ func makeString(a []fakeKeyValue, nonce int) string {
 			ts += ","
 		}
 	}
-	ts += "]"
+	ts += "]}"
 	return ts
 }
 
 func makeDataLine() {
 	a := combineParseAndSort()
-	for i := 0; i < 6000; i++ {
+	for i := 0; i < 19000; i++ {
 		ts := makeString(a, i)
 		//fmt.Println(ts)
 		h := sha256.New()
@@ -108,8 +110,12 @@ func makeDataLine() {
 		res := h.Sum(nil)
 		if res[0] == 0 {
 			// res is a byte array
-			fmt.Printf("nonce: %d - %x %s %s\n", i, res, strconv.FormatInt(int64(res[0]), 2),
-				strconv.FormatInt(int64(res[1]), 2))
+			if len(strconv.FormatInt(int64(res[1]), 2)) <= 2 {
+				fmt.Printf("nonce: %d - %x %s %s\n", i, res, strconv.FormatInt(int64(res[0]), 2),
+					strconv.FormatInt(int64(res[1]), 2))
+
+				fmt.Println(ts)
+			}
 
 		}
 	}

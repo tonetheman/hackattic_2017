@@ -39,3 +39,31 @@ Rejected!
 {
     "rejected": "sorry, nonce 1497 lead to hash 18681e916b6284421719b9317dd380bb1131bf39980abbbd1348e1ade4a4070e - not correct"
 }
+
+
+Rejected!
+{
+    "difficulty": 14,
+    "block": {
+        "nonce": null,
+        "data": [
+            [
+                "6de49d6313b5ddbfb27eccfc6bee569f",
+                -94
+            ],
+            [
+                "dc175ddd1313ef1e588eaf2a6f6f45ee",
+                -65
+            ],
+            [
+                "604959dff246bef7bc604f0be10b7f30",
+                54
+            ]
+        ]
+    }
+}
+
+// NEED TO FIGURE OUT WHAT IS UP
+{
+    "rejected": "sorry, nonce 16946 lead to hash db3366d822b4324cce540a00bc7a9f8a904a43437b4511fc33b165af0b3b31be - not correct"
+}
