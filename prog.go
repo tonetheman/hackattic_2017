@@ -66,6 +66,22 @@ func testSort() {
 }
 
 func combineParseAndSort() {
+	data := readInputFile("input.txt")
+	blockData := gjson.Get(string(data), "block.data")
+	a := make([]fakeKeyValue, 0)
+	blockData.ForEach(func(key, value gjson.Result) bool {
+		fmt.Println("value is array?", value.IsArray())
+		k := value.Array()[0].String()
+		v := value.Array()[1].Int()
+		a = append(a, fakeKeyValue{k, int(v)})
+		return true
+	})
+	fmt.Println("gathered data:", a)
+	sort.Slice(a, func(i, j int) bool {
+		return a[i].key < a[j].key
+	})
+	fmt.Println("sorted")
+	fmt.Println(a)
 
 }
 
