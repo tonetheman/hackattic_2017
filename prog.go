@@ -4,6 +4,8 @@ import (
 	"crypto/sha256"
 	"fmt"
 	"io/ioutil"
+
+	"github.com/tidwall/gjson"
 )
 
 func checkSha256() {
@@ -30,10 +32,22 @@ func readInputFile(filename string) []byte {
 	return data
 }
 
+func howToParse() {
+	data := readInputFile("input.txt")
+	blockData := gjson.Get(string(data), "block.data")
+	fmt.Println("got blockData", blockData)
+	fmt.Printf("type of blockdata is %T\n", blockData)
+	fmt.Println("is array?", blockData.IsArray())
+	blockData.ForEach(func(key, value gjson.Result) bool {
+		fmt.Println("value is array?", value.IsArray())
+		fmt.Println("data hash", value.Array()[0], "now hash value", value.Array()[1])
+		return true
+	})
+}
+
 func main() {
 	//checkSha256()
 	//orderCheck("{a:1,b:1}")
 	//orderCheck("{b:1,a:1}")
-	data := readInputFile("input.txt")
-	inputJson(data)
+	howToParse()
 }
