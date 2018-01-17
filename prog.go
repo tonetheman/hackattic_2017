@@ -2,33 +2,9 @@ package main
 
 import (
 	"crypto/sha256"
-	"encoding/json"
 	"fmt"
 	"io/ioutil"
 )
-
-type keyValue struct {
-	Key   string
-	Value string
-}
-
-type block struct {
-	Nonce string `json:"nonce"`
-	Data  []keyValue `json:"data"`
-}
-type iJson struct {
-	Difficulty int   `json:"difficulty"`
-	Block      block `json:"block"`
-}
-
-func inputJson(s []byte) string {
-	// need to return json without white spaces
-	// and keys need to be in alpha order!
-	var ij iJson
-	json.Unmarshal(s, &ij)
-	fmt.Println("ij", ij)
-	return ""
-}
 
 func checkSha256() {
 	s := sha256.New()
